@@ -81,7 +81,7 @@ Chaque carte règle montre:
 - Pas de backend serveur personnalisé
 - Pas de contrôle d'actionneurs physiques réels (LED/Buzzer simulés via événements)
 
-## 7) Notes de démonstration
+## 7) Notes de démonstration:
 - Le rythme de simulation est optimisé pour une démo pédagogique (événements visibles rapidement).
 - Les déclenchements R1 à R5 apparaissent selon des scénarios simulés (normal, chaud, froid, humide, sombre).
 
