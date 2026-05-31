@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salle Intelligente Connectée</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <!-- Boot overlay -->
+  <div id="boot-overlay">
+    <div class="boot-logo">SIC</div>
+    <div class="boot-title">Salle Intelligente Connectée</div>
+    <div class="boot-bar-wrap"><div class="boot-bar"></div></div>
+    <div class="boot-status" id="bootStatus">Initialisation...</div>
+  </div>
+
+  <!-- Animated background -->
+  <div id="bg-scene">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="container">
+
+    <!-- HEADER -->
+    <section class="header reveal s1">
+      <div class="title">
+        <h1>Salle <span>Intelligente Connectée</span></h1>
+        <div class="title-sub">Journalisation Cloud &amp; Moteur de Règles Événementielles</div>
+      </div>
+      <div class="status-stack">
+        <div class="status-item">
+          <span class="pulse-dot"></span>
+          SYSTÈME OPÉRATIONNEL
+        </div>
+        <div class="status-item">
+          <span id="firebaseDot" class="conn-dot disconnected"></span>
+          <span id="firebaseLabel">Firebase: INITIALISATION...</span>
+        </div>
+        <div class="status-item">
+          <span id="lastUpdatedLabel">Dernière mise à jour: --:--:--</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SENSORS -->
+    <section class="panel reveal s2">
+      <div class="section-label">Capteurs en Temps Réel</div>
+      <div class="sensor-grid">
+        <article class="sensor-card">
+          <div class="sensor-top">
+            <span class="sensor-name">Température</span>
+            <span id="tempState" class="sensor-state">VEILLE</span>
+          </div>
+          <div class="sensor-value-row">
+            <div id="tempValue" class="sensor-value">-- °C</div>
+            <span id="tempTrend" class="sensor-trend">--</span>
+          </div>
+        </article>
+        <article class="sensor-card">
+          <div class="sensor-top">
+            <span class="sensor-name">Humidité</span>
+            <span id="humState" class="sensor-state">VEILLE</span>
+          </div>
+          <div class="sensor-value-row">
+            <div id="humValue" class="sensor-value">-- %</div>
+            <span id="humTrend" class="sensor-trend">--</span>
+          </div>
+        </article>
+        <article class="sensor-card">
+          <div class="sensor-top">
+            <span class="sensor-name">Présence</span>
+            <span id="presenceState" class="sensor-state">VEILLE</span>
+          </div>
+          <div class="sensor-value-row">
+            <div id="presenceValue" class="sensor-value">--</div>
+            <span id="presenceTrend" class="sensor-trend">--</span>
+          </div>
+        </article>
+        <article class="sensor-card">
+          <div class="sensor-top">
+            <span class="sensor-name">Luminosité</span>
+            <span id="lumState" class="sensor-state">VEILLE</span>
+          </div>
+          <div class="sensor-value-row">
+            <div id="lumValue" class="sensor-value">-- lux</div>
+            <span id="lumTrend" class="sensor-trend">--</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CHARTS -->
+    <section class="panel reveal s3">
+      <div class="section-label">Historique Capteurs (20 dernières mesures)</div>
+      <div class="charts-grid">
+        <div class="chart-box"><canvas id="tempHumChart"></canvas></div>
+        <div class="chart-box"><canvas id="lumChart"></canvas></div>
+      </div>
+    </section>
+
+    <!-- RULES -->
+    <section class="panel reveal s4">
+      <div class="section-label">Moteur de Règles</div>
+      <div id="rulesGrid" class="rules-grid"></div>
+    </section>
+
+    <!-- EVENTS -->
+    <section class="panel reveal s5">
+      <div class="section-label">Journal Événements (10 derniers)</div>
+      <div id="eventList" class="event-list"></div>
+    </section>
+
+    <footer class="footer reveal s6">
+      GLSI2 — Introduction IoT — 2025/2026 — Dr. Essid Chaker<br>
+      Ouerghui Moemen &nbsp;·&nbsp; Firas Chandoul &nbsp;·&nbsp; Mohamed Adem Zouabi &nbsp;·&nbsp; Oussema Amer
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
